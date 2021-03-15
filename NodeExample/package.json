@@ -1,7 +1,4 @@
 {
-  "dependencies": {
-    "nconf": "^0.11.2"
-  },
   "name": "nodeexample",
   "version": "1.0.0",
   "main": "calc.js",
@@ -10,5 +7,8 @@
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "nconf": "^0.11.2"
+  },
   "description": ""
 }
