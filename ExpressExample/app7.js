@@ -14,10 +14,10 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 
 // body-parser를 이용해 application/x-www-form-urlencoded 파싱
-app.use(express.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // body-parser를 이용해 application/json 파싱
-app.use(express.json())
+app.use(bodyParser.json())
 app.use('/public', static(path.join(__dirname, 'public')));
 
 // 미들웨어에서 파라미터 확인

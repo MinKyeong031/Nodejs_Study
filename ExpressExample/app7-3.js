@@ -9,9 +9,9 @@ var app = express();
 
 app.set('port', process.env.PORT || 3000);
 
-app.use(express.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use(express.json())
+app.use(bodyParser.json())
 app.use('/', static(path.join(__dirname, 'public')));
 
 app.use(function(req, res) {
