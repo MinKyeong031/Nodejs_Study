@@ -14,6 +14,8 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 
 // body-parser를 이용해 application/x-www-form-urlencoded 파싱
+// 자동으로 req에 body속성이 추가되고 저장된다. 
+// 객체 안에 객체를 파싱할 수 있게하려면 true.
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // body-parser를 이용해 application/json 파싱
@@ -29,7 +31,7 @@ app.use(function(req, res, next) {
   res.write('<h1>Express 서버에서 응답한 결과입니다.</h1>');
   res.write('<div><p>Param id : ' + paramId + '</p></div>');
   res.write('<div><p>Param password : ' + paramPassword + '</p></div>');
-  res.end();x   
+  res.end();
 }); 
 
 http.createServer(app).listen(app.get('port'), function(){
