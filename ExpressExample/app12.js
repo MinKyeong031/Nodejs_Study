@@ -41,7 +41,7 @@ router.route('/process/login').post(function (req, res) {
             authorized: true
         };
 
-        res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
+        res.writeHead('200', { 'Content-Type': 'text/html;charset-utf8' });
         res.write('<h1>로그인 성공</h1>');
         res.write('<div><p>Param id : ' + paramId + '</p></div>');
         res.write('<div><p>Param password : ' + paramPassword + '</p></div>');
@@ -52,6 +52,7 @@ router.route('/process/login').post(function (req, res) {
 
 router.route('/process/logout').get(function (req, res) {
     console.log('/process/logout 호출됨.');
+    res.redirect('/public/login2.html');
     if (req.session.user) {
         // 로그인된 상태
         console.log('로그아웃합니다.');
@@ -77,10 +78,6 @@ router.route('/process/product').get(function (req, res) {
 });
 // 라우터 객체를 app 객체에 등록
 app.use('/', router);
-
-app.all('*', function (req, res) {
-    res.status(404).send('<h1>ERROR - 페이지를 찾을 수 없습니다.</h1>');
-})
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log(`Express 서버가 3000번 포트에서 시작됨`);
