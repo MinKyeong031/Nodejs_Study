@@ -66,11 +66,11 @@ router.route('/process/login').post(function (req, res) {
         };
 
         res.writeHead('200', { 'Content-Type': 'text/html; charset=utf8' });
-        res.write('<h1>로그인 성공</h1>');
+        res.write('<h1>3104_김민경_로그인 성공</h1>');
         res.write('<div><p>Param id : ' + paramId + '</p></div>');
         res.write('<div><p>Param password : ' + paramPassword + '</p></div>');
         res.write("<br><br><button><a href='/process/product'>상품 페이지로 이동하기</a></button>");
-        res.write("<br><br><button><a href='/process/photomulti3104'>파일업로드로 이동하기</a></button>");
+        res.write("<br><br><button><a href='/photomulti3104.html'>파일업로드로 이동하기</a></button>");
         res.end();
     }
 });
@@ -113,7 +113,7 @@ router.route('/process/photo').post(upload.array('photo', 12), function (req, re
                 size = files[index].size;
                 console.log('현재 파일 정보 : ' + originalname + ', ' + filename + ', ' + mimetype + ',' + size);
 
-                res.write('<h3>김민경님 ' +(index + 1) + ' 번째 파일 업로드 성공</h3>');
+                res.write('<h3>3104_김민경님 ' +(index + 1) + ' 번째 파일 업로드 성공</h3>');
                 res.write('<hr/>');
                 res.write('<p>원본 파일명 : ' + originalname + ' -> 저장 파일명 : ' + filename + '</p>');
                 res.write('<p>MIME TYPE : ' + mimetype + '</p>');
@@ -149,5 +149,5 @@ var errorHandler = expressErrorHandler({
 })
 
 http.createServer(app).listen(app.get('port'), function () {
-    console.log(`Express 서버가 3000번 포트에서 시작됨`);
+    console.log(`Express server listening on port 3000`);
 });
