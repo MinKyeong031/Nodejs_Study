@@ -17,13 +17,17 @@
 
 <div class="container">
   <h3>Popover Example</h3>
-  <a href="profile.html">내소개</a>
-  <a href="table.html">시간표</a>
-  <a href="board.html">게시판</a>
-  <a href="http://maps.google.com">구글지도</a>
-  <a href="lecture.html">강의</a>
-  <a href="midwav.html">음악파일</a>
+  <a href="profile.html" title="" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="내소개입니다">내소개</a>
+  <a href="table.html" title="" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="시간표입니다">시간표</a>
+  <a href="board.html" title="" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="게시판입니다">게시판</a>
+  <a href="http://maps.google.com" title="" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="구글지도입니다">구글지도</a>
+  <a href="lecture.html" title="" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="강의내용입니다">강의</a>
+  <a href="midwav.html" title="" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="음악감상하세요">음악파일</a>
 </div>
-
+<script>
+  $(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+  });
+</script>
 </body>
 </html>

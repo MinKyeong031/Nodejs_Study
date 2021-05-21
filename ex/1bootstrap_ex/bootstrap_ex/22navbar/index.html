@@ -8,9 +8,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <script>
-/*   $(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
-  }); */
+
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();   
+      });
   </script>
 </head>
 <body>
@@ -18,19 +19,19 @@
     <!-- Links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="index.html">홈</a>
+        <a class="nav-link" href="index.html" data-toggle="popover" data-trigger="hover" data-content="초기화면입니다.">홈</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="profile.html">내소개</a>
+        <a class="nav-link" href="profile.html" data-toggle="popover" data-trigger="hover" data-content="나의 프로필입니다.">내소개</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="table.html">강의시간표</a>
+        <a class="nav-link" href="table.html" data-toggle="popover" data-trigger="hover" data-content="실시간 반영되니 참고하세요.">강의시간표</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="lecture.html">강의실자료</a>
+        <a class="nav-link" href="lecture.html" data-toggle="popover" data-trigger="hover" data-content="다운받아 사용하세요.">강의실자료</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="board.html">게시판</a>
+        <a class="nav-link" href="board.html" data-toggle="popover" data-trigger="hover" data-content="아직은 공사중입니다.">게시판</a>
       </li>
     </ul>
   </nav>
@@ -69,6 +70,11 @@
     shyoon63@gmail.com</a>.</p>
   </footer>
   </div>
+  <script>
+    $(document).ready(function(){
+      $('[data-toggle="popover"]').popover();   
+    });
+  </script>
 </body>
 </html>
 
