@@ -1,0 +1,134 @@
+C:\nodejs\DatabaseExample>mongod --dbpath ./database/local
+=========================================================================
+<기본명령>
+C:\nodejs\DatabaseExample>mongo
+show dbs;
+use local;
+show collections;
+
+db.users.insert({name:'윤선희',age:20})
+db.users.find().pretty()
+db.users.remove({name:/윤/})
+db.users.find().pretty()
+show collections;
+db.users.drop() =>db.컬렉션명.drop() 
+show collections;
+
+db.users.insert({id:'test01',name:'소녀시대',password:'123456'})
+db.users.insert({id:'test02',name:'방탄소년단',password:'123456'})
+db.users2.insert({id:'test01',name:'윤선희',password:'123456'})
+db.users2.insert({id:'test02',name:'아이유',password:'123456'})
+db.users.find().pretty()
+db.users2.find().pretty()
+db.users.remove({name:/소녀/})
+db.users.find().pretty()
+db.users.insert({id:'test01',name:'소녀시대',password:'123456'})
+db.users.drop()
+db.users2.drop()
+db.users.find().pretty()
+db.users2.find().pretty()
+=========================================================================
+<실습과정>
+Microsoft Windows [Version 10.0.18363.1316]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\nodejs\DatabaseExample>mongo
+MongoDB shell version v4.4.3
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("285ce7bf-f93b-4a82-abb5-fe773fe55da8") }
+MongoDB server version: 4.4.3
+---
+The server generated these startup warnings when booting:
+        2021-02-10T15:58:59.305+09:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs;    
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+test    0.000GB
+> use local;
+switched to db local
+> show collections;
+startup_log
+> db.users.insert({name:'소녀시대',age:20})
+WriteResult({ "nInserted" : 1 })
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("6023b0e1114f67f8ae79d1ef"),
+        "name" : "소녀시대",
+        "age" : 20
+}
+> db.users.remove({name:/소녀/})
+WriteResult({ "nRemoved" : 1 })
+> db.users.find().pretty()
+> show collections;
+startup_log
+users
+> db.users.drop()
+true
+> show collections;
+startup_log
+> db.users.insert({id:'test01',name:'소녀시대',password:'123456'})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({id:'test02',name:'방탄소년단',password:'123456'})
+WriteResult({ "nInserted" : 1 })
+> db.users2.insert({id:'test01',name:'윤선희',password:'123456'})
+WriteResult({ "nInserted" : 1 })
+> db.users2.insert({id:'test02',name:'아이유',password:'123456'})
+WriteResult({ "nInserted" : 1 })
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("6023b129114f67f8ae79d1f0"),
+        "id" : "test01",
+        "name" : "소녀시대",
+        "password" : "123456"
+}
+{
+        "_id" : ObjectId("6023b130114f67f8ae79d1f1"),
+        "id" : "test02",
+        "name" : "방탄소년단",
+        "password" : "123456"
+}
+> db.users2.find().pretty()
+{
+        "_id" : ObjectId("6023b136114f67f8ae79d1f2"),
+        "id" : "test01",
+        "name" : "윤선희",
+        "password" : "123456"
+}
+{
+        "_id" : ObjectId("6023b13d114f67f8ae79d1f3"),
+        "id" : "test02",
+        "name" : "아이유",
+        "password" : "123456"
+}
+> db.users.remove({name:/소녀/})
+WriteResult({ "nRemoved" : 1 })
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("6023b130114f67f8ae79d1f1"),
+        "id" : "test02",
+        "name" : "방탄소년단",
+        "password" : "123456"
+}
+> db.users.insert({id:'test01',name:'소녀시대',password:'123456'})
+WriteResult({ "nInserted" : 1 })
+> db.users.drop()
+true
+> db.users2.drop()
+true
+> db.users.find().pretty()
+> db.users2.find().pretty()
+=========================================================================끝
+==> 입력한 모든 자료를 지우고 비웠는지 확인하여보자!
