@@ -87,31 +87,27 @@ function connectDB() {
 		
         
 		// 스키마 정의
-		
+		UserSchema = mongoose.Schema({
+			id: {type: String, required: true, unique: true},
+			password: {type: String, required: true},
+			name: {type: String, index: 'hashed'},
+			age: {type: Number, 'default':-1},
+			created_at: {type: Date, index: {unique: false}, 'default': Date.now},
+			updated_at: {type: Date, index: {unique: false}, 'default': Date.now}
+		});
 
+		UserSchema.static('findById', function(id, callback){
+			return this.find({id:id}, callback);
+		});
 
+		UserSchema.static('findAll',function(callback){
+			return this.find({}, callback);
+		});
 
+		console.log('UserSchema 정의함.');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
+		UserModel = mongoose.model("users2", UserSchema);
+		console.log('UserModel 정의함.');	
 		
 	});
 	
@@ -235,53 +231,21 @@ router.route('/process/adduser').post(function(req, res) {
 
 
 //사용자 리스트 함수
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+router.route('/process/listuser').post(function(req, res) {
+	console.log('/process/listuser 호출됨.');
+	// 데이터베이스 객체가 초기화된 경우, 모델 객체의 findAll 메소드 호출
+	if (database) {
+	// 1. 모든 사용자 검색
+	UserModel.findAll(function(err, results) {
+	// 에러 발생 시, 클라이언트로 에러 전송
+	if (err) {
+	console.error('사용자 리스트 조회 중 에러 발생 : ' + err.stack);
+	res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+	res.write('<h2>사용자 리스트 조회 중 에러 발생</h2>');
+	res.write('<p>' + err.stack + '</p>');
+	res.end();
+	return;
+	}
 
 
 // 라우터 객체 등록
@@ -290,40 +254,32 @@ app.use('/', router);
 
 
 // 사용자를 인증하는 함수 : 아이디로 먼저 찾고 비밀번호를 그 다음에 비교하도록 함
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var authUser = function(database, id, password, callback) {
+	console.log('authUser 호출됨 : ' + id + ', ' + password);
+	
+    UserModel.findById(id, function(err, results) {
+		if (err) { // 에러 발생 시 콜백 함수를 호출하면서 에러 객체 전달
+			callback(err, null);
+			return;
+		}
+		console.log('아이디 [%s]로 사용자 검색 결과.', id);
+		console.dir(results);
+		
+	    if (results.length > 0) {  // 조회한 레코드가 있는 경우 콜백 함수를 호출하면서 조회 결과 전달
+	    	console.log("아이디와 일치하는 사용자 찾음.");
+			if(results[0]._doc.password == password){
+				console.log("비밀번호 일치함.");
+				callback(null, results);
+			}else{
+				console.log("비밀번호 일치하지 않음.");
+				callback(null, null);
+			}
+	    } else {  // 조회한 레코드가 없는 경우 콜백 함수를 호출하면서 null, null 전달
+	    	console.log("아이디와 일치하는 사용자를 찾지 못함.");
+	    	callback(null, null);
+	    }
+	});
+};
 
 //사용자를 추가하는 함수
 var addUser = function(database, id, password, name, callback) {
