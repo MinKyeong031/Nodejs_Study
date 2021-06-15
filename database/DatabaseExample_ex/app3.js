@@ -77,12 +77,15 @@ function connectDB(){
 		console.log('데이터베이스에 연결되었습니다. : '+ databaseUrl);
 
 		UserSchema = mongoose.Schema({
-			id: String,
-			name: String,
-			password: String
+			age:{type:Number, 'default':-1},
+			id:{type:String, required:true, unique:true, 'default':''},
+			password:{type:String, required:true, unique:true, 'default':''},
+			name:{type:String, required:true, unique:true, 'default':''},
+			created_at:{type:Date, index:{unique:false}, 'default':Date.now},
+			updated_at:{type:Date, index:{unique:false}, 'default':Date.now}
 		});
 		console.log('UserSchema 정의함.');
-		UserModel = mongoose.model("users", UserSchema);
+		UserModel = mongoose.model("users2", UserSchema);
 		console.log('UserModel 정의함.');
 	});
 
