@@ -48,7 +48,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // public 폴더를 static으로 오픈
-app.use('/', static(path.join(__dirname, 'public')));
+app.use('/public', static(path.join(__dirname, 'public')));
 
 // cookie-parser 설정
 app.use(cookieParser());
@@ -76,16 +76,12 @@ var UserModel;
 //데이터베이스에 연결
 function connectDB() {
 	// 데이터베이스 연결 정보
-	//var databaseUrl = 'mongodb://localhost:27017/local';
-
-	var databaseUrl = 'mongodb://mingyg1:mk031031@cluster0-shard-00-00.scs8h.mongodb.net:27017,cluster0-shard-00-01.scs8h.mongodb.net:27017,cluster0-shard-00-02.scs8h.mongodb.net:27017/myuserdb?replicaSet=atlas-78tpca-shard-0&ssl=true&authSource=admin';
+	var databaseUrl = 'mongodb://localhost:27017/local';
 
 	// 데이터베이스 연결
 	console.log('데이터베이스 연결을 시도합니다.');
-	mongoose.Promise = global.Promise;
-	//mongoose.connect(databaseUrl);
-	mongoose.connect(databaseUrl, { useMongoClient: true });
-
+	mongoose.Promise = global.Promise;  // mongoose의 Promise 객체는 global의 Promise 객체 사용하도록 함
+	mongoose.connect(databaseUrl);
 	database = mongoose.connection;
 
 	database.on('error', console.error.bind(console, 'mongoose connection error.'));
@@ -245,26 +241,24 @@ router.route('/process/login').post(function (req, res) {
 
 			// 조회된 레코드가 있으면 성공 응답 전송
 			if (docs) {
-				console.dir(docs + 'last');
+				console.dir(docs);
 
 				// 조회 결과에서 사용자 이름 확인
 				var username = docs[0].name;
 
-				res.redirect('/login_success.html');
-				// res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-				// res.write('<h1>로그인 성공</h1>');
-				// res.write('<div><p>사용자 아이디 : ' + paramId + '</p></div>');
-				// res.write('<div><p>사용자 이름 : ' + username + '</p></div>');
-				// res.write("<br><br><a href='/public/login.html'>다시 로그인하기</a>");
-				// res.end()
+				res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
+				res.write('<h1>로그인 성공</h1>');
+				res.write('<div><p>사용자 아이디 : ' + paramId + '</p></div>');
+				res.write('<div><p>사용자 이름 : ' + username + '</p></div>');
+				res.write("<br><br><a href='/public/login.html'>다시 로그인하기</a>");
+				res.end();
 
 			} else {  // 조회된 레코드가 없는 경우 실패 응답 전송
-				res.redirect('/login_fail.html')
-				// res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-				// res.write('<h1>로그인 실패</h1>');
-				// res.write('<div><p>아이디와 패스워드를 다시 확인하십시오.</p></div>');
-				// res.write("<br><br><a href='/login.html'>다시 로그인하기</a>");
-				// res.end();
+				res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
+				res.write('<h1>로그인  실패</h1>');
+				res.write('<div><p>아이디와 패스워드를 다시 확인하십시오.</p></div>');
+				res.write("<br><br><a href='/public/login.html'>다시 로그인하기</a>");
+				res.end();
 			}
 		});
 	} else {  // 데이터베이스 객체가 초기화되지 않은 경우 실패 응답 전송
@@ -306,13 +300,13 @@ router.route('/process/adduser').post(function (req, res) {
 			// 결과 객체 있으면 성공 응답 전송
 			if (addedUser) {
 				console.dir(addedUser);
-				res.redirect('/adduser_success.html');
-				// res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-				// res.write('<h2>사용자 추가 성공</h2>');
-				// res.end();
-			} else { // 결과 객체가 없으면 실패 응답 젂송
+
 				res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
-				res.write('<h2>사용자 추가 실패</h2>');
+				res.write('<h2>사용자 추가 성공</h2>');
+				res.end();
+			} else {  // 결과 객체가 없으면 실패 응답 전송
+				res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
+				res.write('<h2>사용자 추가  실패</h2>');
 				res.end();
 			}
 		});
@@ -350,7 +344,7 @@ router.route('/process/listuser').post(function (req, res) {
 				console.dir(results);
 
 				res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
-				res.write('<hr /><h4>&nbsp;&nbsp;사용자 리스트</h3><hr /><br>');
+				res.write('<h2>사용자 리스트</h2>');
 				res.write('<div><ul>');
 
 				for (var i = 0; i < results.length; i++) {
@@ -360,8 +354,6 @@ router.route('/process/listuser').post(function (req, res) {
 				}
 
 				res.write('</ul></div>');
-				res.write("<br><br><button><a href='/adduser.html'>사용자추가</a>");
-				res.write("<button><a href='/login.html'> 로그인</a>");
 				res.end();
 			} else {  // 결과 객체가 없으면 실패 응답 전송
 				res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
@@ -384,7 +376,7 @@ app.use('/', router);
 
 
 // 사용자를 인증하는 함수 : 아이디로 먼저 찾고 비밀번호를 그 다음에 비교하도록 함
-var authUser = function (database, id, password, callback) { //229 라인으로 반환
+var authUser = function (database, id, password, callback) {
 	console.log('authUser 호출됨 : ' + id + ', ' + password);
 
 	// 1. 아이디를 이용해 검색
