@@ -1,171 +1,41 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
-		
-		<title>로그인</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
-		
-		<!--<link href="./semantic.min.css" rel="stylesheet" >
--->
-		<style>
-			* {
-				padding:0;
-				margin:0;
-				box-sizing:border-box;
-			}
-			
-			html {
-				width:100%;
-				height:100%;
-			}
-			
-			body {
-				width:100%;
-				height:100%;
-				color: #000;
-				background-color: #fff;
-			}
-					
-			.container {
-				width:100%;
-				height:100%;
-				display:flex;
-				flex-flow:column wrap;
-				align-items:center;
-				justify-content:center;
-			}
 
-			#cardbox {
-				width:70%;
-			}
+<head>
+	<meta charset="UTF-8">
+	<title>3104 김민경 - 로그인 테스트</title>
 
-			#iconImage {
-				display:inline;
-			}
-			
-			#titleText {
-				font-size:1.4em;
-				font-weight:bold;
-				color:#777;
-			}
-			
-			#contentsText {
-				color:#999;
-			}
-			
-			#form1 {
-				padding:1em;
-			}
-			
-			.row {
-				height:3em;
-			}
-			
-			.col1 {
-				width:5em;
-			}
-			 
-			.inputbox {
-				width:20em;
-			}
-			
-			#buttonContainer {
-				padding-top:0.6em;
-				text-align:right;
-			}
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+	<link rel="apple-touch-icon" sizes="180x180" href="images/logo.png" />
+	<link rel="icon" type="image/png" href="images/logo.png" sizes="192x192" />
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 
+</head>
 
+<body>
+	<hr>
+	<h4>&nbsp;&nbsp;3104 김민경 - 로그인</h4>
+	<hr>
+	<form method="post" action="/process/login">
+		<br>
+		&nbsp;&nbsp;
+		<label class="btn btn-info">아&nbsp;&nbsp;이&nbsp;&nbsp;디 </label>
+		<input type="text" size="12" name="id"></input>
+		<br>&nbsp;
+		<label class="btn btn-info">비밀번호</label>
+		<input type="password" size="12" name="password"></input>
+		<br><br>&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="submit" value="확  인" class="btn btn-info"></input>
+		&nbsp;
+		<a href='/index.html' class="btn btn-info">메인페이지</a>
+	</form>
+</body>
 
-
-			@media screen and (min-width : 320px) and (max-width : 768px) {
-    #cardbox {
-        width : 90%;
-    }
-				
-    label[id = contentsText] {
-        display : none;
-    }
-}
-			
-@media screen and (min-width : 768px) and (max-width : 979px) {
-    #cardbox {
-        width : 80%;
-    }
-}
-
-
-			
-		</style>
-		
-<!--		<script src="./jquery-3.1.1.min.js"></script>
-		<script src="./semantic.min.js"></script>-->
-		<script>
-			$(function() {
-				$('.ui.checkbox').checkbox();
-			});
-		</script>
-		
-		
-	</head>
-	<body>
-
-		<div class="container">
-			
-			<div id="cardbox" class="ui blue fluid card">
-				 <div class="content">
-				 	<div class="left floated author">
-				 		<img id="iconImage" class="ui avatar image" src="./images/author.png">
-					</div>
-					<div>
-						<div id="titleText" class="header">로그인</div>
-	   					<div id="contentsText" class="description">
-					       	아이디와 비밀번호를 입력하고 로그인하세요.
-					    </div>
-					</div>
-				 </div>
-			
-				<form id="form1" method="post" action="/process/login">
-					<table>
-						<tr class="row">
-							<td class="col1"><label id="contentsText">아이디</label></td>
-							<td class="col2" colspan="2">
-								<div class="ui input">
-									<input class="inputbox" type="text" name="id" />
-								</div>
-							</td>
-							<td></td>
-						</tr>
-						<tr class="row">
-							<td class="col1"><label id="contentsText">비밀번호</label></td>
-							<td class="col2" colspan="2">
-								<div class="ui input">
-									<input class="inputbox" type="password" name="password" />
-								</div>
-							</td>
-							<td></td>
-						</tr>
-						<tr valign="baseline">
-							<td></td>
-							<td>
-								<div class="ui toggle checkbox">
-									<input type="checkbox" name="saveOption">
-									<label>아이디 저장</label>
-								</div>
-							</td>
-							<td id="buttonContainer" align="right"><input id="submitButton" class="ui primary button" type="submit" value="로그인" name="" /></td>
-						</tr>
-					</table>
-					
-				</form>
-				 
-			</div>
-			
-		</div>
-			 
-	</body>
 </html>
