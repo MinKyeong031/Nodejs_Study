@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>로그인 실패 페이지</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <hr>
+        <h3>로그인 실패</h3>
+        <hr>
+        <!-- <div class="media border p-3">
+<div class =cardbody>
+<div><p>아이디와 패스워드를 다시 확인하십시오.</p>
+</div> -->
+        <div class="form-group">
+            <label for="usr">Name:</label>
+            <input type="text" class="form-control" id="usr" value=<%=userid %>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" value=<%=userpassword %>
+        </div>
+        <br>
+    </div>
+    </div>
+    <br>
+    <a href="/public/login.html" class="btn btn-info" role="button">다시 로그인하기</a>
+    </div>
+</body>
+
+</html>
